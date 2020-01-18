@@ -1,0 +1,17 @@
+by\stormnet\web\pages\AbstractPage.class
+by\stormnet\web\pages\OnlinerTechNewsPage.class
+by\stormnet\api\ApiTest.class
+by\stormnet\api\entities\AbstractService.class
+by\stormnet\web\helpers\OnlinerHomeHelper.class
+by\stormnet\web\helpers\LoginHelper.class
+by\stormnet\web\LoginTest.class
+by\stormnet\web\pages\LoginPage.class
+by\stormnet\web\helpers\AbsractHelper.class
+by\stormnet\web\pages\LamodaHomePage.class
+by\stormnet\web\pages\OnlinerHomePage.class
+by\stormnet\web\CommonTests.class
+by\stormnet\web\LamodaTests.class
+by\stormnet\api\entities\UserService.class
+by\stormnet\web\helpers\LamodaHomeHelper.class
+by\stormnet\web\OnlinerTest.class
+by\stormnet\web\helpers\OnlinerTechNewsHelper.class
