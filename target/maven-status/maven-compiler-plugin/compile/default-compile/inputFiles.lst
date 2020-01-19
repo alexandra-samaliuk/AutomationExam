@@ -1,6 +1,4 @@
-D:\AutomationFrameworkExamProject\src\main\java\by\stormnet\automation\core\webElements\CheckBoxElement.java
-D:\AutomationFrameworkExamProject\src\main\java\by\stormnet\automation\core\FrameworkCore.java
-D:\AutomationFrameworkExamProject\src\main\java\by\stormnet\automation\core\utils\PauseLenght.java
-D:\AutomationFrameworkExamProject\src\main\java\by\stormnet\automation\core\webElements\WebElement.java
-D:\AutomationFrameworkExamProject\src\main\java\by\stormnet\automation\core\utils\BrowserConstants.java
-D:\AutomationFrameworkExamProject\src\main\java\by\stormnet\automation\core\utils\IOUtils.java
+E:\AutomationFrameworkExam\src\main\java\by\stormnet\automation\core\FrameworkCore.java
+E:\AutomationFrameworkExam\src\main\java\by\stormnet\automation\core\utils\BrowserConstants.java
+E:\AutomationFrameworkExam\src\main\java\by\stormnet\automation\core\utils\IOUtils.java
+E:\AutomationFrameworkExam\src\main\java\by\stormnet\automation\core\utils\PauseLenght.java
