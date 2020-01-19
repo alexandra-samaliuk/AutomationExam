@@ -10,8 +10,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 public class FrameworkCore {
     private static WebDriver webDriver;
     private static String browser = IOUtils.loadGenericProperties("browser", "configuration");
-    public static String baseUrl = IOUtils.loadGenericProperties("baseUrl", "configuration");
-    public static String onlinerUrl = IOUtils.loadGenericProperties("onlinerUrl", "configuration");
     public static String lamodaUrl = IOUtils.loadGenericProperties("lamodaUrl", "configuration");
 
     public static WebDriver getInstance(){
