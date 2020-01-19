@@ -4,8 +4,8 @@ import by.stormnet.web.pages.AbstractPage;
 
 public class AbsractHelper {
     AbstractPage abstractPage = new AbstractPage();
-    public void quite(){
+
+    public void quite() {
         abstractPage.getDriver().quit();
     }
-
 }

@@ -14,36 +14,37 @@ public class LamodaTests {
         lamodaHomeHelper.openLamodaHomeHelper();
     }
 
-    @Test (priority = 1, groups = {"registrationValidation"})
+    @Test(priority = 1, groups = {"registrationValidation"})
     public void validationWithEmptyFields() {
         loginHelper.clickRegister();
         Assert.assertTrue(loginHelper.validateAllFields("Это поле необходимо заполнить."));
     }
 
-    @Test (priority = 2, groups = {"registrationValidation"})
-    public void validationInvalidEmail(){
+    @Test(priority = 2, groups = {"registrationValidation"})
+    public void validationInvalidEmail() {
         loginHelper.clickRegister();
         Assert.assertTrue(loginHelper.validateOnlyEmail("Пожалуйста, введите действительный адрес электронной почты. Например, johndoe@domain.com", "test"));
     }
 
-    @Test (priority = 3, groups = {"registrationValidation"})
-    public void validationShortPassword(){
+    @Test(priority = 3, groups = {"registrationValidation"})
+    public void validationShortPassword() {
         loginHelper.clickRegister();
         Assert.assertTrue(loginHelper.validateBothPasswordd("Минимальная длина пароля 6 символов"));
     }
-    @Test (priority = 4, groups = {"registrationValidation"})
-    public void validationDifferentPasswords(){
+
+    @Test(priority = 4, groups = {"registrationValidation"})
+    public void validationDifferentPasswords() {
         loginHelper.clickRegister();
         Assert.assertTrue(loginHelper.validateConfirmPassword("Пожалуйста, убедитесь, что Ваши пароли совпадают"));
     }
 
-    @Test (priority = 5, groups = {"registrationValidation"})
-    public void validationLogin(){
-        Assert.assertTrue(loginHelper.validationForLogin("Неверный адрес e-mail или пароль. Проверьте, нет ли опечаток.","automation_courses@mail.ru", "123456"));
-    }
+//    @Test (priority = 5, groups = {"registrationValidation"})
+//    public void validationLogin(){
+//        Assert.assertTrue(loginHelper.validationForLogin("Неверный адрес e-mail или пароль. Проверьте, нет ли опечаток.","automation_courses@mail.ru", "123456"));
+//    }
 
-    @AfterMethod (onlyForGroups = {"registrationValidation"})
-    public void tearDownValidationRegistration(){
+    @AfterMethod(onlyForGroups = {"registrationValidation"})
+    public void tearDownValidationRegistration() {
         loginHelper.closeRegistrationPopUp();
     }
 

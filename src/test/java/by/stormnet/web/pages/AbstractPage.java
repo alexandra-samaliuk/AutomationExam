@@ -51,6 +51,14 @@ public class AbstractPage extends FrameworkCore {
         return driver.findElement(By.xpath(element));
     }
 
+    public static By getElementById(String id) {
+        return By.id(id);
+    }
+
+    public WebElement getWebElementById(String id) {
+        return driver.findElement(By.id(id));
+    }
+
     public List<WebElement> getElements(String element) {
         return driver.findElements(By.xpath(element));
     }

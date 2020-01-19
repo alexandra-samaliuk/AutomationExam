@@ -5,7 +5,7 @@ import by.stormnet.web.pages.LoginPage;
 public class LoginHelper extends AbsractHelper {
     LoginPage loginPage = new LoginPage();
 
-    public void login(String email, String password){
+    public void login(String email, String password) {
         loginPage.clickLoginButton();
         loginPage.fillEmailField(email);
         loginPage.fillPasswordField(password);
@@ -98,7 +98,8 @@ public class LoginHelper extends AbsractHelper {
             return false;
         }
     }
-    public boolean validationForLogin(String errorMessage, String email, String password){
+
+    public boolean validationForLogin(String errorMessage, String email, String password) {
         login(email, password);
         if (loginPage.getErrorLoginPopUp().compareTo(errorMessage) == 0) {
             return true;

@@ -1,6 +1,6 @@
 by\stormnet\automation\core\utils\PauseLenght.class
-by\stormnet\automation\core\FrameWorkHttpClient.class
 by\stormnet\automation\core\FrameworkCore.class
+by\stormnet\automation\core\webElements\WebElement.class
 by\stormnet\automation\core\utils\BrowserConstants.class
+by\stormnet\automation\core\webElements\CheckBoxElement.class
 by\stormnet\automation\core\utils\IOUtils.class
-by\stormnet\automation\core\Response.class
