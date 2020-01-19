@@ -27,7 +27,7 @@ public class AbstractPage extends FrameworkCore {
 
     public static void waitForElementVisible(By by) {
         try {
-            WebDriverWait waiter = new WebDriverWait(driver, PauseLenght.MAX.value());
+            WebDriverWait waiter = new WebDriverWait(driver, PauseLenght.AJAX.value());
             waiter.until(ExpectedConditions.presenceOfAllElementsLocatedBy(by));
         } catch (Throwable e) {
             System.out.println(e.getMessage());
@@ -36,7 +36,7 @@ public class AbstractPage extends FrameworkCore {
 
     public static void waitForElementClickable(By by) {
         try {
-            WebDriverWait waiter = new WebDriverWait(driver, PauseLenght.MAX.value());
+            WebDriverWait waiter = new WebDriverWait(driver, PauseLenght.AJAX.value());
             waiter.until(ExpectedConditions.elementToBeClickable(by));
         } catch (Throwable e) {
             System.out.println(e.getMessage());
@@ -66,5 +66,22 @@ public class AbstractPage extends FrameworkCore {
     public void setCursorOnElement(String locator) {
         actions.moveToElement(driver.findElement(By.xpath(locator)));
         actions.perform();
+    }
+
+    public String getCategoryText(String str) {
+        String[] transfer = str.split(" ");
+        return transfer[0];
+    }
+
+    public int getNumber(String element) {
+        String str = getElement(element).getText();
+        String[] transfer = str.split(" ");
+        return Integer.valueOf(transfer[0]);
+    }
+
+    public float getNumber(WebElement element) {
+        String str = element.getText();
+        String transfer = str.split(" ")[0];
+        return Float.parseFloat(transfer);
     }
 }

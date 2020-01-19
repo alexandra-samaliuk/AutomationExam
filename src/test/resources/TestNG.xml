@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suite name="Acceptance suite">
-    <test verbose="2" name="login test">
+    <listeners>
+        <listener class-name="by.stormnet.automation.core.common.AnnotationTransformer"/>
+    </listeners>
+    <test verbose="2" name="lamoda test">
         <classes>
             <class name="by.stormnet.web.CartTests"/>
             <class name="by.stormnet.web.DeliveryRegionTests"/>
             <class name="by.stormnet.web.LamodaTests"/>
+            <class name="by.stormnet.web.FiltrationTests"/>
         </classes>
     </test>
 </suite>
