@@ -15,68 +15,72 @@ public class FiltrationTests {
     public void searchOnLamoda(String data) {
         lamodaHomeHelper.openLamodaHomeHelper();
         mainHelper.search(data);
-        Assert.assertTrue(mainHelper.resultsNumber() > 0, "Goods are NOT found");
+        Assert.assertTrue(mainHelper.resultsNumber() > 0);
     }
 
-    @Test(priority = 102)
+    @Test(priority = 102, dependsOnMethods = {"searchOnLamoda"})
     public void selectSubCategory() {
+        System.out.println("selectSubCategory test");
         mainHelper.search();
-        Assert.assertTrue(mainHelper.checkCategory(), "Wrong category");
+        Assert.assertTrue(mainHelper.checkCategory());
     }
 
-    @Test(priority = 103)
+    @Test(priority = 103, dependsOnMethods = {"searchOnLamoda", "selectSubCategory"})
     public void applySoring() {
         mainHelper.applySorting();
-        System.out.println("Filtration are applied");
-        Assert.assertTrue(mainHelper.checkPriceSorting(), "Filtration are NOT applied");
+        System.out.println("applySoring test");
+        Assert.assertTrue(mainHelper.checkPriceSorting());
     }
 
-    @Test(priority = 104)
+    @Test(priority = 104, dependsOnMethods = {"searchOnLamoda", "selectSubCategory"})
     public void sortingIsSaved() {
+        System.out.println("sortingIsSaved test");
         String before = mainHelper.sortingText();
-        System.out.println(before);
         mainHelper.nextSearch();
         String after = mainHelper.sortingText();
-        System.out.println(after);
-        Assert.assertTrue(after.compareTo(before) == 0, "Filtration in reset");
+        Assert.assertTrue(after.compareTo(before) == 0);
     }
 
-    @Test(priority = 105)
-    public void applyByBrendFilter() {
-        mainHelper.brendFilter();
-        Assert.assertTrue(mainHelper.brendFilterCheck(), "Filter not applied");
-    }
-
-    @Test(priority = 106)
-    public void clearBrendFilter() {
-        int before = mainHelper.resultsNumber();
-        mainHelper.brendFilterCleared();
-        Assert.assertTrue(before < mainHelper.resultsNumber(), "Filter not cleared");
-    }
-
-    @Test(priority = 107)
+    @Test(priority = 105, dependsOnMethods = {"searchOnLamoda", "selectSubCategory"})
     public void applySaleFilter() {
+        System.out.println("applySaleFilter test");
         mainHelper.salesFilter();
-        Assert.assertTrue(mainHelper.salesFilterCheck(), "Filter not applied");
+        Assert.assertTrue(mainHelper.salesFilterCheck());
     }
 
-    @Test(priority = 108)
+    @Test(priority = 106, dependsOnMethods = {"searchOnLamoda", "selectSubCategory", "applySaleFilter"})
     public void saleFilterStays() {
+        System.out.println("saleFilterStays test");
         mainHelper.nextSearch();
-        Assert.assertTrue(mainHelper.salesFilterCheck(), "Filter is reset");
+        Assert.assertTrue(mainHelper.salesFilterCheck());
     }
 
-    @Test(priority = 109)
+    @Test(priority = 107, dependsOnMethods = {"searchOnLamoda", "selectSubCategory"})
     public void applyPriceFilter() {
+        System.out.println("applyPriceFilter test");
         mainHelper.priceFilter();
-        Assert.assertTrue(mainHelper.priceFilterCheck(), "Filter is NOT applied");
+        Assert.assertTrue(mainHelper.priceFilterCheck());
     }
 
-    @Test(priority = 110)
-    public void clearAllFilters() {
-        int before = mainHelper.resultsNumber();
-        mainHelper.AllFiltersCleared();
-        Assert.assertTrue(before < mainHelper.resultsNumber(), "Filter not cleared");
+    @Test(priority = 108, dependsOnMethods = {"searchOnLamoda"})
+    public void searchByText() {
+        System.out.println("searchByText test");
+        mainHelper.searchField(1);
+        Assert.assertTrue(mainHelper.checkEnteredCategory());
+    }
+
+    @Test(priority = 109, dependsOnMethods = {"searchOnLamoda"})
+    public void searchByWrongText() {
+        System.out.println("searchByWrongText test");
+        mainHelper.searchField(2);
+        Assert.assertTrue(mainHelper.checkInvalidCategory());
+    }
+
+    @Test(priority = 110, dependsOnMethods = {"searchOnLamoda", "searchByWrongText"})
+    public void navigationFromTopMenu() {
+        System.out.println("navigationFromTopMenu test");
+        mainHelper.searchFromBottom();
+        Assert.assertTrue(mainHelper.checkCategory());
     }
 
     @AfterClass

@@ -83,4 +83,10 @@ public class AbstractPage extends FrameworkCore {
         String transfer = str.split(" ")[0];
         return Float.parseFloat(transfer);
     }
+
+    public int randomInt(){
+        return obj.nextInt(10);
+    }
+
+    public void refresh(){driver.navigate().refresh();}
 }

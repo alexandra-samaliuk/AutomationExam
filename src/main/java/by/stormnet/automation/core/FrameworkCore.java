@@ -7,11 +7,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import java.util.Random;
+
 public class FrameworkCore {
     private static WebDriver webDriver;
     private static String browser = IOUtils.loadGenericProperties("browser", "configuration");
     public static String lamodaUrl = IOUtils.loadGenericProperties("lamodaUrl", "configuration");
     public static String lamodaAccsUrl = IOUtils.loadGenericProperties("lamodaAccsUrl", "configuration");
+    public Random obj = new Random();
 
     public static WebDriver getInstance(){
         if(browser.equals(BrowserConstants.CHROME)){
