@@ -7,8 +7,10 @@
         <classes>
             <class name="by.stormnet.web.CartTests"/>
             <class name="by.stormnet.web.DeliveryRegionTests"/>
-            <class name="by.stormnet.web.LamodaTests"/>
+            <class name="by.stormnet.web.LoginTests"/>
+            <class name="by.stormnet.web.BlogTest"/>
             <class name="by.stormnet.web.FiltrationTests"/>
+            <class name="by.stormnet.web.factory.FactoryTest"/>
         </classes>
     </test>
 </suite>

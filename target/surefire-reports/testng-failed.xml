@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Acceptance suite]" verbose="0">
+  <listeners>
+    <listener class-name="by.stormnet.automation.core.common.AnnotationTransformer"/>
+  </listeners>
+  <test thread-count="5" name="lamoda test(failed)" verbose="0">
+    <classes>
+      <class name="by.stormnet.web.ProfileTest">
+        <methods>
+          <include name="setUp"/>
+          <include name="checkProfileAfterLogin"/>
+        </methods>
+      </class> <!-- by.stormnet.web.ProfileTest -->
+    </classes>
+  </test> <!-- lamoda test(failed) -->
+</suite> <!-- Failed suite [Acceptance suite] -->

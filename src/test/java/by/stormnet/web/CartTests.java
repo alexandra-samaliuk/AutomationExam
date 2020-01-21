@@ -24,34 +24,34 @@ public class CartTests {
         lamodaHomeHelper.LogInToAccount(LamodaEmail, LamodaPassword);
     }
 
-    @Test(priority = 1)
+    @Test(priority = 201)
     public void addAndCheckItemInCart() {
         lamodaAccsHelper.openLamodaAccsPage();
         lamodaAccsHelper.addItemToCart();
         Assert.assertTrue(cartOnLamodaHelper.checkItemInCart());
     }
 
-    @Test(priority = 2)
+    @Test(priority = 202)
     public void checkRequiredFieldsAreEmpty() {
         Assert.assertTrue(cartOnLamodaHelper.checkCityFieldIsEmpty() && cartOnLamodaHelper.checkPhoneFieldIsEmpty());
     }
 
-    @Test(priority = 3)
+    @Test(priority = 203)
     public void addOneMoreItemInCart() {
         Assert.assertTrue(cartOnLamodaHelper.checkItemIsAddedToCart());
     }
 
-    @Test(priority = 4)
+    @Test(priority = 204)
     public void removeOneItemFromCart() {
         Assert.assertTrue(cartOnLamodaHelper.checkItemIsRemovedFromCart());
     }
 
-    @Test(priority = 5)
+    @Test(priority = 205)
     public void removeItemAndCheckEmptyCart() {
         Assert.assertTrue(cartOnLamodaHelper.removeAndCheckCartIsEmpty());
     }
 
-    @Test(priority = 6, groups = {"DeliveryType"})
+    @Test(priority = 206, groups = {"DeliveryType"})
     public void fillOrderFieldsAndCheckConfirmation() {
         lamodaAccsHelper.openLamodaAccsPage();
         lamodaAccsHelper.addItemToCart();
@@ -63,13 +63,8 @@ public class CartTests {
         cartOnLamodaHelper.closeConfirmationPopUp();
     }
 
-    @Test(priority = 7)
+    @Test(priority = 207)
     public void checkOrderPointIsChosen() {
         Assert.assertTrue(cartOnLamodaHelper.checkSelectedOrderPoint());
-    }
-
-    @AfterClass
-    public void tearDown() {
-        lamodaHomeHelper.quite();
     }
 }
