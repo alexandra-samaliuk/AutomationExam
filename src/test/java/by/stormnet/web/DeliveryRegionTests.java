@@ -20,24 +20,19 @@ public class DeliveryRegionTests {
         lamodaHomeHelper.openLamodaHomeHelper();
     }
 
-    @Test(priority = 1)
+    @Test(priority = 301)
     public void checkElementsOnDeliveryPopUp() {
         Assert.assertTrue(deliveryRegionHelper.checkDeliveryElements());
     }
 
-    @Test(priority = 2)
+    @Test(priority = 302)
     public void selectMinskAsDeliveryPoint() {
         Assert.assertTrue(deliveryRegionHelper.checkMinskIsSelectedAsDeliveryPoint());
     }
 
-    @Test(priority = 3)
+    @Test(priority = 303)
     public void checkErrorMessageForWrongCityName() {
         Assert.assertTrue(deliveryRegionHelper.checkErrorMessageForWrongCityName());
-    }
-
-    @AfterClass
-    public void tearDown() {
-        lamodaHomeHelper.quite();
     }
 
 }

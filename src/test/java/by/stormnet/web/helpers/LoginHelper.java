@@ -5,13 +5,6 @@ import by.stormnet.web.pages.LoginPage;
 public class LoginHelper extends AbsractHelper {
     LoginPage loginPage = new LoginPage();
 
-    public void login(String email, String password) {
-        loginPage.clickLoginButton();
-        loginPage.fillEmailField(email);
-        loginPage.fillPasswordField(password);
-        loginPage.clickLoginBtnInPopUp();
-    }
-
     public void clickRegister() {
         loginPage.clickLoginButton();
         loginPage.clickCreateAccountButton();
@@ -64,11 +57,7 @@ public class LoginHelper extends AbsractHelper {
         loginPage.fillConfirmPasswordField("Test1234");
         loginPage.fillNameField("Test");
         loginPage.clickSubmitRegistrationButton();
-        if (validateEmailField(errorMessage)) {
-            return true;
-        } else {
-            return false;
-        }
+        return (validateEmailField(errorMessage));
     }
 
     public void closeRegistrationPopUp() {
@@ -80,17 +69,13 @@ public class LoginHelper extends AbsractHelper {
         loginPage.fillPasswordField("Test1234");
         loginPage.fillConfirmPasswordField("Test123");
         loginPage.fillNameField("Test");
-        if (validateConfirmPasswordField(errorMessage)) {
-            return true;
-        } else {
-            return false;
-        }
+        return validateConfirmPasswordField(errorMessage);
     }
 
-    public boolean validateBothPasswordd(String errorMessage) {
+    public boolean validateBothPasswordd(String errorMessage, String password) {
         loginPage.fillEmailField("email");
-        loginPage.fillPasswordField("1234");
-        loginPage.fillConfirmPasswordField("1234");
+        loginPage.fillPasswordField(password);
+        loginPage.fillConfirmPasswordField(password);
         loginPage.fillNameField("Test");
         if (validatePasswordField(errorMessage) && validateConfirmPasswordField(errorMessage)) {
             return true;
@@ -99,13 +84,15 @@ public class LoginHelper extends AbsractHelper {
         }
     }
 
-    public boolean validationForLogin(String errorMessage, String email, String password) {
-        login(email, password);
-        if (loginPage.getErrorLoginPopUp().compareTo(errorMessage) == 0) {
-            return true;
-        } else {
-            return false;
-        }
+    public boolean validateIncorrectSymbolsPassword(String errorMessage, String password) {
+        loginPage.fillPasswordField(password);
+        loginPage.fillConfirmPasswordField(password);
+        return validatePasswordField(errorMessage);
     }
 
+    public boolean validateIncorrectName(String errorMessage, String name) {
+        loginPage.fillNameField(name);
+        loginPage.fillEmailField("email");
+        return validateNameField(errorMessage);
+    }
 }

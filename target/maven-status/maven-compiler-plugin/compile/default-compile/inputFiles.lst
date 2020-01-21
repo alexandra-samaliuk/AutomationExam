@@ -1,4 +1,6 @@
 E:\AutomationFrameworkExam\src\main\java\by\stormnet\automation\core\FrameworkCore.java
+E:\AutomationFrameworkExam\src\main\java\by\stormnet\automation\core\common\AnnotationTransformer.java
 E:\AutomationFrameworkExam\src\main\java\by\stormnet\automation\core\utils\BrowserConstants.java
+E:\AutomationFrameworkExam\src\main\java\by\stormnet\automation\core\common\RetryAnalyzer.java
 E:\AutomationFrameworkExam\src\main\java\by\stormnet\automation\core\utils\IOUtils.java
 E:\AutomationFrameworkExam\src\main\java\by\stormnet\automation\core\utils\PauseLenght.java

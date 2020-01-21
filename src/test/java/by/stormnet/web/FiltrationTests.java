@@ -11,27 +11,27 @@ public class FiltrationTests {
     private FiltrHelper mainHelper = new FiltrHelper();
     private LamodaHomeHelper lamodaHomeHelper = new LamodaHomeHelper();
 
-    @Test(dataProvider = "searchText", priority = 1)
+    @Test(dataProvider = "searchText", priority = 101)
     public void searchOnLamoda(String data) {
         lamodaHomeHelper.openLamodaHomeHelper();
         mainHelper.search(data);
         Assert.assertTrue(mainHelper.resultsNumber() > 0, "Goods are NOT found");
     }
 
-    @Test(priority = 2)
+    @Test(priority = 102)
     public void selectSubCategory() {
         mainHelper.search();
         Assert.assertTrue(mainHelper.checkCategory(), "Wrong category");
     }
 
-    @Test(priority = 3)
+    @Test(priority = 103)
     public void applySoring() {
         mainHelper.applySorting();
         System.out.println("Filtration are applied");
         Assert.assertTrue(mainHelper.checkPriceSorting(), "Filtration are NOT applied");
     }
 
-    @Test(priority = 4)
+    @Test(priority = 104)
     public void sortingIsSaved() {
         String before = mainHelper.sortingText();
         System.out.println(before);
@@ -41,38 +41,38 @@ public class FiltrationTests {
         Assert.assertTrue(after.compareTo(before) == 0, "Filtration in reset");
     }
 
-    @Test(priority = 5)
+    @Test(priority = 105)
     public void applyByBrendFilter() {
         mainHelper.brendFilter();
         Assert.assertTrue(mainHelper.brendFilterCheck(), "Filter not applied");
     }
 
-    @Test(priority = 6)
+    @Test(priority = 106)
     public void clearBrendFilter() {
         int before = mainHelper.resultsNumber();
         mainHelper.brendFilterCleared();
         Assert.assertTrue(before < mainHelper.resultsNumber(), "Filter not cleared");
     }
 
-    @Test(priority = 7)
+    @Test(priority = 107)
     public void applySaleFilter() {
         mainHelper.salesFilter();
         Assert.assertTrue(mainHelper.salesFilterCheck(), "Filter not applied");
     }
 
-    @Test(priority = 8)
+    @Test(priority = 108)
     public void saleFilterStays() {
         mainHelper.nextSearch();
         Assert.assertTrue(mainHelper.salesFilterCheck(), "Filter is reset");
     }
 
-    @Test(priority = 9)
+    @Test(priority = 109)
     public void applyPriceFilter() {
         mainHelper.priceFilter();
         Assert.assertTrue(mainHelper.priceFilterCheck(), "Filter is NOT applied");
     }
 
-    @Test(priority = 10)
+    @Test(priority = 110)
     public void clearAllFilters() {
         int before = mainHelper.resultsNumber();
         mainHelper.AllFiltersCleared();

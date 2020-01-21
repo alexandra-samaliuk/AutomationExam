@@ -45,11 +45,6 @@ public class FilterPage extends AbstractPage {
         return onLM;
     }
 
-/*    public FilterPage navigateToMainPage() {
-        openUrl(baseUrl);
-        return getLamodaMainPage();
-    }*/
-
     public FilterPage searchOnMainPage(String data) {
         String str = categoryMainPageX + data + "')]";
         setCursorOnElement(str);

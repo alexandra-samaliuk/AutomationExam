@@ -1,4 +1,6 @@
-by\stormnet\automation\core\utils\BrowserConstants.class
 by\stormnet\automation\core\utils\PauseLenght.class
 by\stormnet\automation\core\FrameworkCore.class
+by\stormnet\automation\core\utils\BrowserConstants.class
 by\stormnet\automation\core\utils\IOUtils.class
+by\stormnet\automation\core\common\RetryAnalyzer.class
+by\stormnet\automation\core\common\AnnotationTransformer.class

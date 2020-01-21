@@ -22,7 +22,6 @@ public class AbstractPage extends FrameworkCore {
     public void openUrl(String url) {
         driver.manage().window().maximize();
         driver.get(url);
-
     }
 
     public static void waitForElementVisible(By by) {
