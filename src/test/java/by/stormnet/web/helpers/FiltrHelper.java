@@ -14,12 +14,33 @@ public class FiltrHelper extends AbsractHelper {
 
     public FiltrHelper search() {
         onLM.closePopUp();
-        onLM.searchBySubCategory(onLM.getCategoryFromList());
+        onLM.searchBySubCategory(onLM.getCategoryFromList(1));
+        return this;
+    }
+
+    public FiltrHelper searchField(int n) {
+        switch (n) {
+            case 1:
+                onLM.searchByText("юбки");
+                break;
+            case 2:
+                onLM.searchByText("tester");
+                break;
+        }
         return this;
     }
 
     public int resultsNumber() {
         return onLM.resultsNumber();
+    }
+
+    public boolean checkEnteredCategory() {
+        String init = onLM.getGoodsCategoryTitle().toLowerCase();
+        return init.contains("юбки");
+    }
+
+    public boolean checkInvalidCategory() {
+        return onLM.getNoResultsTitle().isDisplayed();
     }
 
     public boolean checkCategory() {
@@ -36,13 +57,13 @@ public class FiltrHelper extends AbsractHelper {
 
     public boolean checkPriceSorting() {
         float[] forPriceCheck = onLM.priceCheck();
-        return forPriceCheck[0] <= forPriceCheck[1];
+        return forPriceCheck[0] <= forPriceCheck[forPriceCheck.length - 1];
     }
 
     public FiltrHelper nextSearch() {
-        String nextCategory = onLM.getCategoryFromList();
+        String nextCategory = onLM.getCategoryFromList(1);
         while (nextCategory.contains(onLM.getName())) {
-            nextCategory = onLM.getCategoryFromList();
+            nextCategory = onLM.getCategoryFromList(1);
         }
         onLM.searchBySubCategory(nextCategory);
         return this;
@@ -52,21 +73,6 @@ public class FiltrHelper extends AbsractHelper {
         return onLM.sortingCheck();
     }
 
-    public FiltrHelper brendFilter() {
-        onLM.openPopUp(2);
-        onLM.chooseBrendFilter();
-        onLM.pressApplyButton();
-        return this;
-    }
-
-    public boolean brendFilterCheck() {
-        return onLM.getBrendName().compareTo(onLM.getGoodsBrend()) == 0;
-    }
-
-    public FiltrHelper brendFilterCleared() {
-        onLM.clearBrend();
-        return this;
-    }
 
     public FiltrHelper salesFilter() {
         onLM.chooseSaleFilter();
@@ -86,7 +92,7 @@ public class FiltrHelper extends AbsractHelper {
 
     public boolean priceFilterCheck() {
         int forCheck = 0;
-        float limitation = onLM.getCheckPrice();
+        float limitation = (float) onLM.getCheckPrice();
         ArrayList<Float> list = onLM.getGoodsPrices();
         for (Float a : list) {
             if (a < limitation) {
@@ -96,8 +102,8 @@ public class FiltrHelper extends AbsractHelper {
         return forCheck == 0;
     }
 
-    public FiltrHelper AllFiltersCleared() {
-        onLM.clearAll();
+    public FiltrHelper searchFromBottom() {
+        onLM.searchBySubCategory(onLM.getCategoryFromList(2));
         return this;
     }
 }

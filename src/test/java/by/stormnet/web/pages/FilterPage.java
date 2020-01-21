@@ -7,55 +7,69 @@ import java.util.List;
 import java.util.Random;
 
 public class FilterPage extends AbstractPage {
-    private static String checkElementOnOpening = "//div[@class='tizer-gender-select']";
+    private String checkElementOnFilter1 = "//div[@class='unipop__item unipop__item_subs']";
+    private String checkElementOnFilter2 = "//div[@class='unipop__item unipop__item_chat js-chat-button']";
     private String categoryMainPageX = "//span[contains(text(),'";
     private String searchResultCheckX = "//span[@class='products-catalog__head-counter']";
     private String goodsItem = "//a[@class='products-list-item__link link']";
     private String subCategory = "//li[@class='cat-nav-item dt102_li2']";
     private String categoryName;
-    private String initHendler;
     private String subCategoryTitle = "//div[@class='title']";
     private String sorting = "//span[@class='button button_right button_wo-pdng-r']";
     private String checkForSortingDropdown = "//ul[@class='dropdown']";
     private String byPriceSorting = "//li[@data-order='price_asc']";
-    private String prices = "//span[@class='price__actual']";
     private String toClose = "//div[@class='sub-popup-feb18__close']";
-    private String byBrend = "//span[@class='button button_left button_s arrow-bottom multifilter__button']/span[text()='Бренд']";
-    private String byPrice = "//span[@class='button button_left button_s arrow-bottom multifilter__button']/span[text()='Цена']";
+    private String byPrice = "//span[contains(@class,'button')]/span[contains(text(), 'Цена')]/../..";
     private String checkForFilterDropdown = "//div[@class='button-dropdown button-dropdown_open']/div[@class='dropdown']";
-    private String brendCheckbox = "//div[@class='button-dropdown button-dropdown_open']/div/div[2]/div/label";
     private String applyButton = "//span[@class='button button_s button_blue multifilter-actions__apply']";
-    private String brendName;
-    private String goodsBrend = "//div[@class='products-list-item__brand']";
-    private String clearFilter = "//div[contains(@class, 'multifilter_active')]/span[@class='button button_right button_s multifilter__reset']";
     private String salesFilter = "//label[contains(text(), 'Только со скидкой')]";
     private String salePrices = "//span[@class='price__old']";
     private String discauntPrices = "//span[@class='js-cd-discount price__action']";
     private String minPrice = "//input[@class='text-field range__value range__value_left']";
     private String maxPrice = "//input[@class='text-field range__value range__value_right']";
-    private String clearAll = "//div[contains(@class, 'multifilter__button-reset-all')]";
+    private String searchField = "//input[contains(@class, 'text-field text-field_large search__input js-search-field')]";
+    private String bottomSubCategory = "//a[contains(@class, 'sm-link')]";
+    private String noResultsTitle = "//div[@class='catalog-empty-search__subtitle']";
     private int checkPrice;
 
-    Random obj = new Random();
+    private void waitForBar() {
+        waitForElementClickable(getElementBy(checkElementOnFilter1));
+        waitForElementClickable(getElementBy(checkElementOnFilter2));
+    }
 
     public static FilterPage getLamodaMainPage() {
         FilterPage onLM = new FilterPage();
-        waitForElementVisible(getElementBy(checkElementOnOpening));
-        System.out.println("Lamoda is opened");
         return onLM;
     }
 
     public FilterPage searchOnMainPage(String data) {
         String str = categoryMainPageX + data + "')]";
         setCursorOnElement(str);
+        waitForElementClickable(getElementBy(str));
         getElement(str).click();
         waitForElementVisible(getElementBy(searchResultCheckX));
         return getLamodaMainPage();
     }
 
-    public String getCategoryFromList() {
-        int n = obj.nextInt(10);
-        return (subCategory + "[" + n + "]");
+    public void searchByText(String data) {
+        WebElement search = getElement(searchField);
+        search.clear();
+        search.sendKeys(data + "\n");
+        waitForElementVisible(getElementBy(subCategoryTitle));
+    }
+
+    public String getCategoryFromList(int m) {
+        int n = randomInt();
+        while (n == 0) {
+            n = randomInt();
+        }
+        switch (m) {
+            case 1:
+                return (subCategory + "[" + n + "]/span/a");
+            case 2:
+                return (bottomSubCategory + "[" + (n + 1) + "]");
+        }
+        return "Error";
     }
 
     public void closePopUp() {
@@ -63,12 +77,12 @@ public class FilterPage extends AbstractPage {
         getElement(toClose).click();
     }
 
-    public FilterPage searchBySubCategory(String str) {
+    public void searchBySubCategory(String str) {
         setCursorOnElement(str);
         getElement(str).click();
         waitForElementVisible(getElementBy(searchResultCheckX));
         categoryName = getElement(str).getText();
-        return getLamodaMainPage();
+        waitForBar();
     }
 
     public String getName() {
@@ -79,34 +93,39 @@ public class FilterPage extends AbstractPage {
         return getElement(subCategoryTitle).getText();
     }
 
+    public WebElement getNoResultsTitle() {
+        return getElement(noResultsTitle);
+    }
+
     public int resultsNumber() {
+        waitForBar();
+        waitForElementVisible(getElementBy(searchResultCheckX));
         return getNumber(searchResultCheckX);
     }
 
     public void openPopUp(int identificator) {
         switch (identificator) {
             case 1:
+                waitForElementClickable(getElementBy(sorting));
                 getElement(sorting).click();
                 waitForElementVisible(getElementBy(checkForSortingDropdown));
                 break;
-            case 2:
-                getElement(byBrend).click();
-                waitForElementVisible(getElementBy(checkForFilterDropdown));
-                break;
             case 3:
+                refresh();
+                waitForElementClickable(getElementBy(byPrice));
                 getElement(byPrice).click();
                 waitForElementVisible(getElementBy(checkForFilterDropdown));
                 break;
         }
     }
 
-    public FilterPage chooseSorting() {
+    public void chooseSorting() {
         getElement(byPriceSorting).click();
-        return getLamodaMainPage();
+        waitForBar();
     }
 
     public float[] priceCheck() {
-        List<WebElement> pricesList = getElements(prices);
+        List<WebElement> pricesList = getElements(salePrices);
         float[] forPriceCheck = new float[2];
         for (int i = 0; i < 2; i++) {
             forPriceCheck[i] = getNumber(pricesList.get(i));
@@ -118,34 +137,18 @@ public class FilterPage extends AbstractPage {
         return getElement(sorting).getText();
     }
 
-    public void chooseBrendFilter() {
-        List<WebElement> checkboxes = getElements(brendCheckbox);
-        brendName = checkboxes.get(1).getText();
-        checkboxes.get(1).click();
-    }
-
-    public FilterPage pressApplyButton() {
+    public void pressApplyButton() {
+        waitForElementClickable(getElementBy(applyButton));
         getElement(applyButton).click();
-        return getLamodaMainPage();
+        waitForElementClickable(getElementBy(goodsItem + "[1]"));
+        waitForBar();
     }
 
-    public String getBrendName() {
-        return brendName;
-    }
-
-    public String getGoodsBrend() {
-        List<WebElement> goods = getElements(goodsBrend);
-        return getCategoryText(goods.get(0).getText());
-    }
-
-    public FilterPage clearBrend() {
-        getElement(clearFilter).click();
-        return getLamodaMainPage();
-    }
-
-    public FilterPage chooseSaleFilter() {
+    public void chooseSaleFilter() {
+        refresh();
+        waitForElementClickable(getElementBy(salesFilter));
         getElement(salesFilter).click();
-        return getLamodaMainPage();
+        waitForBar();
     }
 
     public int checkGoodsNumber() {
@@ -162,6 +165,7 @@ public class FilterPage extends AbstractPage {
         int min = Integer.valueOf(getElement(minPrice).getAttribute("placeholder"));
         int max = Integer.valueOf(getElement(maxPrice).getAttribute("placeholder"));
         checkPrice = ((max - min) / 3) + min;
+        getElement(minPrice).clear();
         getElement(minPrice).sendKeys(Integer.toString(checkPrice));
     }
 
@@ -176,10 +180,5 @@ public class FilterPage extends AbstractPage {
             prices.add(getNumber(list.get(i)));
         }
         return prices;
-    }
-
-    public FilterPage clearAll() {
-        getElement(clearAll).click();
-        return getLamodaMainPage();
     }
 }
