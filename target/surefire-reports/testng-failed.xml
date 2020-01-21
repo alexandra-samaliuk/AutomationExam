@@ -6,12 +6,16 @@
   </listeners>
   <test thread-count="5" name="lamoda test(failed)" verbose="0">
     <classes>
-      <class name="by.stormnet.web.ProfileTest">
+      <class name="by.stormnet.web.FiltrationTests">
         <methods>
-          <include name="setUp"/>
-          <include name="checkProfileAfterLogin"/>
+          <include name="sortingIsSaved"/>
+          <include name="applySaleFilter"/>
+          <include name="selectSubCategory"/>
+          <include name="applyPriceFilter"/>
+          <include name="tearDown"/>
+          <include name="searchOnLamoda" invocation-numbers="0 0 0 1 2 2"/>
         </methods>
-      </class> <!-- by.stormnet.web.ProfileTest -->
+      </class> <!-- by.stormnet.web.FiltrationTests -->
     </classes>
   </test> <!-- lamoda test(failed) -->
 </suite> <!-- Failed suite [Acceptance suite] -->

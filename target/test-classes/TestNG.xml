@@ -10,6 +10,7 @@
             <class name="by.stormnet.web.LoginTests"/>
             <class name="by.stormnet.web.BlogTest"/>
             <class name="by.stormnet.web.FiltrationTests"/>
+            <class name="by.stormnet.web.factory.FactoryTest"/>
         </classes>
     </test>
 </suite>
